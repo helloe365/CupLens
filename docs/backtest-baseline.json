@@ -1,0 +1,34 @@
+{
+  "data_path": "historical_matches.csv",
+  "data_sha256": "e9e417298abc881bac63f1d89722982e30881788ee59a77b761c2d7c2284d2cf",
+  "feature_cutoff_rule": "date < tournament_start",
+  "log_loss_probability_clip": [
+    1e-06,
+    0.999999
+  ],
+  "model_version": "elo-poisson-v1",
+  "results": [
+    {
+      "accuracy": 0.578125,
+      "brier_score": 0.5900714075364465,
+      "feature_cutoff_at": "2018-06-13T23:59:59.999999+00:00",
+      "first_test_match_at": "2018-06-14T00:00:00+00:00",
+      "log_loss": 0.9883891458484543,
+      "matches": 64,
+      "test_year": 2018
+    },
+    {
+      "accuracy": 0.4375,
+      "brier_score": 0.6136941526151563,
+      "feature_cutoff_at": "2022-11-19T23:59:59.999999+00:00",
+      "first_test_match_at": "2022-11-20T00:00:00+00:00",
+      "log_loss": 1.0313190734812303,
+      "matches": 64,
+      "test_year": 2022
+    }
+  ],
+  "score_range": [
+    0,
+    7
+  ]
+}

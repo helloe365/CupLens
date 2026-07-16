@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "group": "A",
+      "standings": [
+        {"rank": 1, "team": "Mexico"},
+        {"rank": 2, "team": "South Africa"},
+        {"rank": 3, "team": "Korea Republic"},
+        {"rank": 4, "team": "Czechia"}
+      ]
+    },
+    {
+      "group": "B",
+      "standings": [
+        {"rank": 1, "team": "Switzerland"},
+        {"rank": 2, "team": "Canada"},
+        {"rank": 3, "team": "Bosnia and Herzegovina"},
+        {"rank": 4, "team": "Qatar"}
+      ]
+    },
+    {
+      "group": "C",
+      "standings": [
+        {"rank": 1, "team": "Brazil"},
+        {"rank": 2, "team": "Morocco"},
+        {"rank": 3, "team": "Scotland"},
+        {"rank": 4, "team": "Haiti"}
+      ]
+    },
+    {
+      "group": "D",
+      "standings": [
+        {"rank": 1, "team": "USA"},
+        {"rank": 2, "team": "Australia"},
+        {"rank": 3, "team": "Paraguay"},
+        {"rank": 4, "team": "Türkiye"}
+      ]
+    },
+    {
+      "group": "E",
+      "standings": [
+        {"rank": 1, "team": "Germany"},
+        {"rank": 2, "team": "Côte d'Ivoire"},
+        {"rank": 3, "team": "Ecuador"},
+        {"rank": 4, "team": "Curaçao"}
+      ]
+    },
+    {
+      "group": "F",
+      "standings": [
+        {"rank": 1, "team": "Netherlands"},
+        {"rank": 2, "team": "Japan"},
+        {"rank": 3, "team": "Sweden"},
+        {"rank": 4, "team": "Tunisia"}
+      ]
+    },
+    {
+      "group": "G",
+      "standings": [
+        {"rank": 1, "team": "Belgium"},
+        {"rank": 2, "team": "Egypt"},
+        {"rank": 3, "team": "IR Iran"},
+        {"rank": 4, "team": "New Zealand"}
+      ]
+    },
+    {
+      "group": "H",
+      "standings": [
+        {"rank": 1, "team": "Spain"},
+        {"rank": 2, "team": "Cabo Verde"},
+        {"rank": 3, "team": "Uruguay"},
+        {"rank": 4, "team": "Saudi Arabia"}
+      ]
+    },
+    {
+      "group": "I",
+      "standings": [
+        {"rank": 1, "team": "France"},
+        {"rank": 2, "team": "Norway"},
+        {"rank": 3, "team": "Senegal"},
+        {"rank": 4, "team": "Iraq"}
+      ]
+    },
+    {
+      "group": "J",
+      "standings": [
+        {"rank": 1, "team": "Argentina"},
+        {"rank": 2, "team": "Austria"},
+        {"rank": 3, "team": "Algeria"},
+        {"rank": 4, "team": "Jordan"}
+      ]
+    },
+    {
+      "group": "K",
+      "standings": [
+        {"rank": 1, "team": "Colombia"},
+        {"rank": 2, "team": "Portugal"},
+        {"rank": 3, "team": "Congo DR"},
+        {"rank": 4, "team": "Uzbekistan"}
+      ]
+    },
+    {
+      "group": "L",
+      "standings": [
+        {"rank": 1, "team": "England"},
+        {"rank": 2, "team": "Croatia"},
+        {"rank": 3, "team": "Ghana"},
+        {"rank": 4, "team": "Panama"}
+      ]
+    }
+  ]
+}

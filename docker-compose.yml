@@ -1,0 +1,32 @@
+services:
+  cuplens:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cuplens:local
+    ports:
+      - "127.0.0.1:18080:8000"
+    restart: unless-stopped
+    environment:
+      DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY:-}
+      DASHSCOPE_BASE_URL: ${DASHSCOPE_BASE_URL:-https://llm-0nsl26x7l7v72b8i.cn-beijing.maas.aliyuncs.com/compatible-mode/v1}
+      QWEN_MODEL: ${QWEN_MODEL:-qwen3.7-plus}
+      MODEL_VARIANT: ${MODEL_VARIANT:-dixon-coles-lightgbm-meta}
+      AUTO_UPDATE_ENABLED: ${AUTO_UPDATE_ENABLED:-false}
+      AUTO_UPDATE_SOURCE_URL: ${AUTO_UPDATE_SOURCE_URL:-}
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=5)"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    mem_limit: 1g

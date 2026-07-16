@@ -1,0 +1,97 @@
+[
+  {
+    "source_id": "fifa-match-schedule",
+    "role": "official",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+    "retrieved_at": "2026-07-14T10:59:23+08:00",
+    "verified_at": "2026-07-14T10:59:23+08:00",
+    "file_sha256": {
+      "data/mappings/team_names.json": "597cae497dcdfa05dee8eb46b0541755de40166bb871bbf115164e56f572756f",
+      "data/raw/groups_final.json": "cc97af6a7c255a4dd8fd440bc98f8ba6357a47b19c2ad1194ca0a20306758a08"
+    }
+  },
+  {
+    "source_id": "fifa-knockout-bracket",
+    "role": "official",
+    "url": "https://www.fifa.com/en/articles/knockout-stage-match-schedule-bracket",
+    "retrieved_at": "2026-07-14T10:59:23+08:00",
+    "verified_at": "2026-07-14T10:59:23+08:00",
+    "file_sha256": {}
+  },
+  {
+    "source_id": "nbc-final-group-standings",
+    "role": "secondary",
+    "url": "https://www.nbcsports.com/soccer/news/2026-world-cup-group-stage-table-full-standings-for-all-12-groups",
+    "retrieved_at": "2026-07-14T10:59:23+08:00",
+    "verified_at": "2026-07-14T10:59:23+08:00",
+    "file_sha256": {
+      "data/raw/groups_final.json": "cc97af6a7c255a4dd8fd440bc98f8ba6357a47b19c2ad1194ca0a20306758a08"
+    }
+  },
+  {
+    "source_id": "sky-knockout-bracket",
+    "role": "secondary",
+    "url": "https://www.skysports.com/football/news/11095/13556636/world-cup-2026-bracket-and-knockout-fixtures-whos-facing-who-in-the-last-32-and-route-to-final",
+    "retrieved_at": "2026-07-14T10:59:23+08:00",
+    "verified_at": "2026-07-14T10:59:23+08:00",
+    "file_sha256": {}
+  },
+  {
+    "source_id": "afc-brazil-norway-report",
+    "role": "secondary",
+    "url": "https://www.the-afc.com/en/national/fifa_world_cup.html/news/r16-brazil-1-2-norway",
+    "retrieved_at": "2026-07-14T10:59:23+08:00",
+    "verified_at": "2026-07-14T10:59:23+08:00",
+    "file_sha256": {}
+  },
+  {
+    "source_id": "historical-international-results",
+    "role": "secondary",
+    "url": "https://raw.githubusercontent.com/martj42/international_results/master/results.csv",
+    "retrieved_at": "2026-07-14T03:25:41+00:00",
+    "verified_at": "2026-07-14T03:25:41+00:00",
+    "file_sha256": {
+      "data/raw/historical_matches.csv": "e9e417298abc881bac63f1d89722982e30881788ee59a77b761c2d7c2284d2cf"
+    }
+  },
+  {
+    "source_id": "rfef-france-spain-semifinal-report",
+    "role": "official",
+    "url": "https://rfef.es/es/noticias/espana-luchara-por-su-segunda-estrella-en-nueva-york",
+    "retrieved_at": "2026-07-15T09:09:57+08:00",
+    "verified_at": "2026-07-15T09:09:57+08:00",
+    "file_sha256": {
+      "data/raw/knockout_results.json": "08a238e7651c2fd7d7ff26000b3a52be1d602dea2d5d6dace53192bb01acdf29"
+    }
+  },
+  {
+    "source_id": "sky-france-spain-semifinal-report",
+    "role": "secondary",
+    "url": "https://www.skysports.com/football/france-vs-spain/549866",
+    "retrieved_at": "2026-07-15T09:09:57+08:00",
+    "verified_at": "2026-07-15T09:09:57+08:00",
+    "file_sha256": {
+      "data/raw/knockout_results.json": "08a238e7651c2fd7d7ff26000b3a52be1d602dea2d5d6dace53192bb01acdf29"
+    }
+  },
+  {
+    "source_id": "fifa-england-argentina-semifinal-report",
+    "role": "official",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+    "retrieved_at": "2026-07-16T06:00:00+08:00",
+    "verified_at": "2026-07-16T06:00:00+08:00",
+    "file_sha256": {
+      "data/raw/knockout_results.json": "08a238e7651c2fd7d7ff26000b3a52be1d602dea2d5d6dace53192bb01acdf29"
+    }
+  },
+  {
+    "source_id": "bbc-england-argentina-semifinal-report",
+    "role": "secondary",
+    "url": "https://www.bbc.co.uk/sport/football/world-cup",
+    "retrieved_at": "2026-07-16T06:00:00+08:00",
+    "verified_at": "2026-07-16T06:00:00+08:00",
+    "file_sha256": {
+      "data/raw/knockout_results.json": "08a238e7651c2fd7d7ff26000b3a52be1d602dea2d5d6dace53192bb01acdf29"
+    }
+  }
+]

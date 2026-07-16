@@ -1,0 +1,30 @@
+[
+  {
+    "cutoff_at": "2026-07-14T11:25:41+08:00",
+    "generated_at": "2026-07-14T14:30:11.431563+08:00",
+    "model_version": "elo-poisson-v1",
+    "path": "20260714-pre-semifinals-v1.json",
+    "snapshot_id": "20260714-pre-semifinals-v1"
+  },
+  {
+    "cutoff_at": "2026-07-15T09:12:18+08:00",
+    "generated_at": "2026-07-15T09:12:24.200219+08:00",
+    "model_version": "elo-poisson-v1",
+    "path": "20260715-post-france-spain-v1.json",
+    "snapshot_id": "20260715-post-france-spain-v1"
+  },
+  {
+    "cutoff_at": "2026-07-16T06:30:00+08:00",
+    "generated_at": "2026-07-16T09:38:55.272638+08:00",
+    "model_version": "elo-poisson-v1",
+    "path": "20260716-post-england-argentina-v1.json",
+    "snapshot_id": "20260716-post-england-argentina-v1"
+  },
+  {
+    "cutoff_at": "2026-07-16T06:30:00+08:00",
+    "generated_at": "2026-07-16T16:40:44.445426+08:00",
+    "model_version": "elo-poisson-dixon-coles-lightgbm-meta-enabled",
+    "path": "20260716-post-england-argentina-combined-v1.json",
+    "snapshot_id": "20260716-post-england-argentina-combined-v1"
+  }
+]

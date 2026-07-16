@@ -1,0 +1,40 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Frontend
+node_modules/
+frontend/dist/
+coverage/
+.vite/
+
+# Local agent state
+.codex/
+.claude/
+.agents/
+.qoder/
+
+# Internal planning and prompts
+prompts/
+AGENTS.md
+plan.md
+docs/superpowers/
+docs/demo-script.md
+docs/submission-draft.md
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
