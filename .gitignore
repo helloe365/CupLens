@@ -41,7 +41,10 @@ docs/qoder/*
 !docs/qoder/3模型与证据页面.png
 !docs/qoder/4.Agent问答页面.png
 !docs/qoder/制定世界杯预测Agent方案.png
+!docs/qoder/开始执行方案1.png
 !docs/qoder/开始执行方案2.png
+!docs/qoder/开始执行方案3.png
+!docs/qoder/进行赛前快照合理性分析.png
 
 # OS and editor
 .DS_Store

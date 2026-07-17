@@ -306,15 +306,27 @@ docker compose down
 Qoder 参与了赛题理解、方案设计、工程拆分、测试驱动实现与赛前快照审查。核心价值不是替代模型，而是帮助把预测任务拆成可验证的数据契约、模型流水线、快照证据与部署步骤。
 
 <details>
-<summary><strong>查看 Qoder 方案设计与工程执行截图</strong></summary>
+<summary><strong>查看 Qoder 从方案设计到快照审查的完整过程</strong></summary>
 
-### 制定世界杯预测 Agent 方案
+### 01 · 制定世界杯预测 Agent 方案
 
 ![使用 Qoder 制定世界杯预测 Agent 方案](docs/qoder/制定世界杯预测Agent方案.png)
 
-### 分阶段执行数据契约与测试门禁
+### 02 · 搭建工程骨架与健康接口
 
-![使用 Qoder 分阶段执行方案](docs/qoder/开始执行方案2.png)
+![使用 Qoder 开始执行工程方案](docs/qoder/开始执行方案1.png)
+
+### 03 · 建立数据契约与测试门禁
+
+![使用 Qoder 执行数据契约与测试方案](docs/qoder/开始执行方案2.png)
+
+### 04 · 实现预测模型并处理环境依赖
+
+![使用 Qoder 实现预测模型](docs/qoder/开始执行方案3.png)
+
+### 05 · 审查赛前快照合理性
+
+![使用 Qoder 进行赛前快照合理性分析](docs/qoder/进行赛前快照合理性分析.png)
 
 </details>
 
