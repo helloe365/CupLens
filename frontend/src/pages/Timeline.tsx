@@ -11,6 +11,14 @@ interface TimelineData {
   index: SnapshotIndexEntry[];
 }
 
+const tournamentStages = [
+  ["round_of_32", "32 强"],
+  ["round_of_16", "16 强"],
+  ["quarterfinal", "四分之一决赛"],
+  ["semifinal", "半决赛"],
+  ["final", "决赛"],
+] as const;
+
 export function Timeline() {
   const [data, setData] = useState<TimelineData | null>(null);
   const [comparison, setComparison] = useState<SnapshotComparison | null>(null);
@@ -75,31 +83,47 @@ export function Timeline() {
   return (
     <div className="page-stack">
       <section className="page-intro">
-        <p className="eyebrow">TIMELINE / 赛程与变化</p>
-        <h1>真实比分向前锁定，预测沿时间留痕。</h1>
-        <p>比赛 ID 明确连接每轮赛程；快照只新增，不覆盖。</p>
+        <div>
+          <p className="eyebrow">TOURNAMENT / 淘汰赛</p>
+          <h1 className="timeline-title">一条从真实赛果，通往下一场预测的路。</h1>
+          <p>每场比赛都保留明确 ID 与状态；已结束的比分向前锁定，未开赛的概率读取自当前快照。</p>
+        </div>
       </section>
 
       <ModelBadge provenance={data.snapshot} />
 
-      <section className="panel group-summary" aria-labelledby="group-heading">
-        <div className="section-heading">
+      <section className="tournament-progress" aria-labelledby="progress-heading">
+        <div className="progress-heading">
           <div>
-            <p className="eyebrow">GROUP STAGE</p>
-            <h2 id="group-heading">小组赛最终排名摘要</h2>
+            <p className="eyebrow">TOURNAMENT PULSE</p>
+            <h2 id="progress-heading">赛事进度</h2>
           </div>
-          <span className="kind-label kind-label--actual">ACTUAL · 已锁定</span>
+          <div className="progress-total">
+            <strong>{data.snapshot.actual_matches.length}</strong>
+            <span>场淘汰赛已锁定</span>
+          </div>
         </div>
-        <div className="state-card">
-          当前只读快照 API 未提供分组排名明细；前端不会从淘汰赛结果反推或补全。
-        </div>
+        <ol>
+          {tournamentStages.map(([stage, label]) => {
+            const actual = data.snapshot.actual_matches.filter((match) => match.stage === stage).length;
+            const forecast = data.snapshot.forecast_matches.filter((match) => match.stage === stage).length;
+            const status = forecast > 0 ? "forecast" : actual > 0 ? "actual" : "pending";
+            return (
+              <li className={`progress-stage progress-stage--${status}`} key={stage}>
+                <i aria-hidden="true" />
+                <span>{label}</span>
+                <strong>{forecast > 0 ? `${forecast} 场待赛` : actual > 0 ? `${actual} 场完成` : "待定"}</strong>
+              </li>
+            );
+          })}
+        </ol>
       </section>
 
       <section aria-labelledby="bracket-heading">
         <div className="section-heading section-heading--outside">
           <div>
             <p className="eyebrow">KNOCKOUT BRACKET</p>
-            <h2 id="bracket-heading">32 强至决赛</h2>
+            <h2 id="bracket-heading">完整比赛路径</h2>
           </div>
           <div className="legend legend--inline">
             <span><i className="legend-actual" /> 真实比分</span>

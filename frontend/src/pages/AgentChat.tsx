@@ -16,7 +16,7 @@ import type {
 
 const suggestions = [
   "谁最可能夺冠？",
-  "France 和 Spain 的半决赛预测是什么？",
+  "Spain 和 Argentina 的决赛预测是什么？",
   "比较最早与最新快照有什么变化？",
   "这个模型有哪些限制？",
 ];
@@ -101,44 +101,67 @@ export function AgentChat() {
   return (
     <div className="page-stack">
       <section className="page-intro agent-intro">
-        <p className="eyebrow">AGENT Q&A / 工具问答</p>
-        <h1>让语言解释证据，不让语言改写数字。</h1>
-        <p>Agent 只能调用四个白名单只读工具；结构化卡片始终优先于聊天文本。</p>
+        <div>
+          <p className="eyebrow">READ-ONLY AGENT / 预测问答</p>
+          <h1>它可以解释概率，但没有权力改写概率。</h1>
+          <p>Agent 先调用四个白名单只读工具，再组织回答；结构化卡片始终是数值真源。</p>
+        </div>
+        <div className="agent-rule-card">
+          <span>AGENT ACCESS</span>
+          <strong>READ ONLY</strong>
+          <small>无训练权限 · 无快照写权限 · 无概率计算权限</small>
+        </div>
       </section>
 
-      <div className="suggestion-list" aria-label="建议问题">
-        {suggestions.map((suggestion) => (
-          <button
-            key={suggestion}
-            type="button"
-            onClick={() => setQuestion(suggestion)}
-          >
-            {suggestion}
-          </button>
-        ))}
-      </div>
-
-      <form className="chat-form" onSubmit={submit}>
-        <label htmlFor="agent-question">向 CupLens 提问</label>
-        <div>
-          <input
-            id="agent-question"
-            maxLength={1000}
-            onChange={(event) => setQuestion(event.target.value)}
-            placeholder="例如：谁最可能夺冠？"
-            value={question}
-          />
-          <button disabled={loading} type="submit">
-            {loading ? "正在调用工具…" : "发送问题"}
-          </button>
+      <section className="agent-console" aria-labelledby="agent-console-heading">
+        <header>
+          <div>
+            <i aria-hidden="true" />
+            <span id="agent-console-heading">CupLens evidence console</span>
+          </div>
+          <small>4 tools available</small>
+        </header>
+        <div className="suggestion-list" aria-label="建议问题">
+          {suggestions.map((suggestion) => (
+            <button
+              key={suggestion}
+              type="button"
+              onClick={() => setQuestion(suggestion)}
+            >
+              {suggestion}
+            </button>
+          ))}
         </div>
-      </form>
+
+        <form className="chat-form" onSubmit={submit}>
+          <label htmlFor="agent-question">输入关于预测、比赛、快照或模型的问题</label>
+          <div>
+            <input
+              autoComplete="off"
+              id="agent-question"
+              maxLength={1000}
+              name="question"
+              onChange={(event) => setQuestion(event.target.value)}
+              placeholder="例如：比较最早与最新快照的变化…"
+              value={question}
+            />
+            <button disabled={loading} type="submit">
+              {loading ? "正在读取证据…" : "发送问题"}
+            </button>
+          </div>
+        </form>
+      </section>
 
       {error && <div className="state-card state-card--error" role="alert">{error}</div>}
       {loading && <div className="state-card state-card--loading">正在读取确定性工具结果…</div>}
 
       {!loading && !response && !error && (
-        <div className="state-card">选择建议问题或输入问题，结构化结果将在这里显示。</div>
+        <div className="agent-capabilities">
+          <div><span>01</span><strong>当前预测</strong><p>读取冠军概率与剩余比赛。</p></div>
+          <div><span>02</span><strong>比赛解释</strong><p>返回胜平负、晋级与比分分布。</p></div>
+          <div><span>03</span><strong>快照比较</strong><p>解释概率如何随真实赛果变化。</p></div>
+          <div><span>04</span><strong>模型边界</strong><p>说明方法、回测指标和已知限制。</p></div>
+        </div>
       )}
 
       {response && !loading && (

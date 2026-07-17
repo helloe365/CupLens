@@ -32,6 +32,17 @@ function kickoff(value: string): string {
   }).format(new Date(value));
 }
 
+function verifiedAt(value: string): string {
+  return new Intl.DateTimeFormat("zh-CN", {
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "Asia/Shanghai",
+    hour12: false,
+  }).format(new Date(value));
+}
+
 export function MatchCard({ match, compact = false }: MatchCardProps) {
   const isActual = match.result_kind === "actual";
 
@@ -58,6 +69,10 @@ export function MatchCard({ match, compact = false }: MatchCardProps) {
         )}
         <strong>{match.away_team}</strong>
       </div>
+
+      {isActual && match.home_penalty_score !== null && match.away_penalty_score !== null && (
+        <p className="penalty-line">点球 {match.home_penalty_score} : {match.away_penalty_score}</p>
+      )}
 
       {isPredictedMatch(match) ? (
         <>
@@ -99,6 +114,13 @@ export function MatchCard({ match, compact = false }: MatchCardProps) {
       ) : !isActual ? (
         <p className="pending-copy">对阵将在上游比赛结束后确定，当前不补全概率。</p>
       ) : null}
+
+      {isActual && !compact && (
+        <div className="match-verification">
+          <span>核验于 {verifiedAt(match.verified_at)} CST</span>
+          <a href={match.source_url}>查看赛果来源 <i aria-hidden="true">↗</i></a>
+        </div>
+      )}
     </article>
   );
 }

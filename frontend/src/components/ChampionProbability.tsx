@@ -33,7 +33,7 @@ export function ChampionProbability({ probabilities }: ChampionProbabilityProps)
     <section className="panel probability-panel" aria-labelledby="champion-heading">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">20,000 次预计算</p>
+          <p className="eyebrow">PRECOMPUTED CHAMPION RACE</p>
           <h2 id="champion-heading">夺冠概率</h2>
         </div>
         <span className="data-note">API 原值 · 仅显示格式化</span>
@@ -47,18 +47,18 @@ export function ChampionProbability({ probabilities }: ChampionProbabilityProps)
         <div className="chart-wrap" aria-label="四队夺冠概率条形图">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={ordered} layout="vertical" margin={{ left: 8, right: 20 }}>
-              <CartesianGrid stroke="#28333c" horizontal={false} />
+              <CartesianGrid stroke="#244650" horizontal={false} />
               <XAxis
                 type="number"
                 domain={[0, 1]}
                 tickFormatter={(value: number) => `${value * 100}%`}
-                stroke="#81909b"
+                stroke="#91a8ae"
               />
               <YAxis
                 dataKey="team"
                 type="category"
                 width={74}
-                stroke="#d8dee2"
+                stroke="#d9e4e3"
                 tickLine={false}
               />
               <Tooltip
@@ -68,15 +68,15 @@ export function ChampionProbability({ probabilities }: ChampionProbabilityProps)
                   "夺冠概率",
                 ]}
                 contentStyle={{
-                  background: "#11191f",
-                  border: "1px solid #384751",
-                  borderRadius: "10px",
+                  background: "#0a222b",
+                  border: "1px solid #355761",
+                  borderRadius: "0",
                 }}
               />
               <Bar
                 dataKey="champion_probability"
-                fill="#d9ad5b"
-                radius={[0, 7, 7, 0]}
+                fill="#f4c95d"
+                radius={[0, 2, 2, 0]}
               />
             </BarChart>
           </ResponsiveContainer>

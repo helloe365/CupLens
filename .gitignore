@@ -33,6 +33,16 @@ docs/superpowers/
 docs/demo-script.md
 docs/submission-draft.md
 
+# Curated README screenshots only
+docs/qoder/*
+!docs/qoder/1.预测中心页面.png
+!docs/qoder/1.1预测中心页面-剩余赛程预测.png
+!docs/qoder/2.淘汰赛页面-完整比赛路径.png
+!docs/qoder/3模型与证据页面.png
+!docs/qoder/4.Agent问答页面.png
+!docs/qoder/制定世界杯预测Agent方案.png
+!docs/qoder/开始执行方案2.png
+
 # OS and editor
 .DS_Store
 Thumbs.db
