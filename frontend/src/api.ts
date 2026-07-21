@@ -40,6 +40,12 @@ export function getSnapshots(): Promise<SnapshotIndexEntry[]> {
   return requestJson<SnapshotIndexEntry[]>("/api/snapshots");
 }
 
+export function getSnapshot(snapshotId: string): Promise<Snapshot> {
+  return requestJson<Snapshot>(
+    `/api/snapshots/${encodeURIComponent(snapshotId)}`,
+  );
+}
+
 export function compareSnapshots(
   baseSnapshotId: string,
   targetSnapshotId: string,

@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { compareSnapshots, getLatestSnapshot, getSnapshots } from "../api";
+import { compareSnapshots, getLatestSnapshot, getSnapshot, getSnapshots } from "../api";
 import { Bracket } from "../components/Bracket";
+import { ForecastBreakdown } from "../components/ForecastBreakdown";
 import { ModelBadge } from "../components/ModelBadge";
 import { SnapshotDiff } from "../components/SnapshotDiff";
+import { SnapshotSummary } from "../components/SnapshotSummary";
+import { SnapshotTimeline } from "../components/SnapshotTimeline";
+import { TeamProbabilityBoard } from "../components/TeamProbabilityBoard";
 import type { Snapshot, SnapshotComparison, SnapshotIndexEntry } from "../types";
-
-interface TimelineData {
-  snapshot: Snapshot;
-  index: SnapshotIndexEntry[];
-}
 
 const tournamentStages = [
   ["round_of_32", "32 强"],
@@ -20,34 +19,62 @@ const tournamentStages = [
 ] as const;
 
 export function Timeline() {
-  const [data, setData] = useState<TimelineData | null>(null);
+  const [index, setIndex] = useState<SnapshotIndexEntry[]>([]);
+  const [latest, setLatest] = useState<Snapshot | null>(null);
+  const [selectedId, setSelectedId] = useState("");
+  const [selected, setSelected] = useState<Snapshot | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [comparison, setComparison] = useState<SnapshotComparison | null>(null);
   const [baseId, setBaseId] = useState("");
   const [targetId, setTargetId] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [comparisonError, setComparisonError] = useState<string | null>(null);
   const [comparing, setComparing] = useState(false);
 
   useEffect(() => {
     let active = true;
     Promise.all([getLatestSnapshot(), getSnapshots()])
-      .then(([snapshot, index]) => {
+      .then(([snapshot, indexEntries]) => {
         if (!active) return;
-        setData({ snapshot, index });
-        if (index.length > 0) {
-          setBaseId(index[0].snapshot_id);
-          setTargetId(index[index.length - 1].snapshot_id);
+        setLatest(snapshot);
+        setIndex(indexEntries);
+        setSelectedId(snapshot.snapshot_id);
+        setSelected(snapshot);
+        if (indexEntries.length > 0) {
+          setBaseId(indexEntries[0].snapshot_id);
+          setTargetId(indexEntries[indexEntries.length - 1].snapshot_id);
         }
       })
       .catch((reason: unknown) => {
         if (active) {
-          setError(reason instanceof Error ? reason.message : "赛程数据加载失败");
+          setLoadError(reason instanceof Error ? reason.message : "赛程数据加载失败");
         }
       });
     return () => {
       active = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (!selectedId) return;
+    if (latest && selectedId === latest.snapshot_id) {
+      setSelected(latest);
+      return;
+    }
+    let active = true;
+    setLoadError(null);
+    getSnapshot(selectedId)
+      .then((snapshot) => {
+        if (active) setSelected(snapshot);
+      })
+      .catch((reason: unknown) => {
+        if (active) {
+          setLoadError(reason instanceof Error ? reason.message : "历史快照加载失败");
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [selectedId, latest]);
 
   useEffect(() => {
     if (!baseId || !targetId) return;
@@ -73,10 +100,10 @@ export function Timeline() {
     };
   }, [baseId, targetId]);
 
-  if (error) {
-    return <div className="state-card state-card--error" role="alert">{error}</div>;
+  if (loadError && !selected) {
+    return <div className="state-card state-card--error" role="alert">{loadError}</div>;
   }
-  if (!data) {
+  if (!selected) {
     return <div className="state-card state-card--loading">正在读取赛程与快照索引…</div>;
   }
 
@@ -90,7 +117,17 @@ export function Timeline() {
         </div>
       </section>
 
-      <ModelBadge provenance={data.snapshot} />
+      <SnapshotTimeline
+        entries={index}
+        selectedId={selectedId}
+        onSelect={setSelectedId}
+      />
+
+      <ModelBadge provenance={selected} />
+
+      <SnapshotSummary snapshot={selected} />
+
+      <TeamProbabilityBoard snapshot={selected} />
 
       <section className="tournament-progress" aria-labelledby="progress-heading">
         <div className="progress-heading">
@@ -99,14 +136,14 @@ export function Timeline() {
             <h2 id="progress-heading">赛事进度</h2>
           </div>
           <div className="progress-total">
-            <strong>{data.snapshot.actual_matches.length}</strong>
+            <strong>{selected.actual_matches.length}</strong>
             <span>场淘汰赛已锁定</span>
           </div>
         </div>
         <ol>
           {tournamentStages.map(([stage, label]) => {
-            const actual = data.snapshot.actual_matches.filter((match) => match.stage === stage).length;
-            const forecast = data.snapshot.forecast_matches.filter((match) => match.stage === stage).length;
+            const actual = selected.actual_matches.filter((match) => match.stage === stage).length;
+            const forecast = selected.forecast_matches.filter((match) => match.stage === stage).length;
             const status = forecast > 0 ? "forecast" : actual > 0 ? "actual" : "pending";
             return (
               <li className={`progress-stage progress-stage--${status}`} key={stage}>
@@ -131,24 +168,26 @@ export function Timeline() {
           </div>
         </div>
         <Bracket
-          actualMatches={data.snapshot.actual_matches}
-          forecastMatches={data.snapshot.forecast_matches}
+          actualMatches={selected.actual_matches}
+          forecastMatches={selected.forecast_matches}
         />
       </section>
+
+      <ForecastBreakdown snapshot={selected} />
 
       <section className="snapshot-controls" aria-labelledby="compare-heading">
         <div>
           <p className="eyebrow">SNAPSHOT CHANGE</p>
           <h2 id="compare-heading">选择两个证据时点</h2>
         </div>
-        {data.index.length === 0 ? (
+        {index.length === 0 ? (
           <div className="state-card">快照索引为空，无法比较。</div>
         ) : (
           <div className="select-grid">
             <label>
               基准快照
               <select value={baseId} onChange={(event) => setBaseId(event.target.value)}>
-                {data.index.map((entry) => (
+                {index.map((entry) => (
                   <option key={entry.snapshot_id} value={entry.snapshot_id}>
                     {entry.snapshot_id}
                   </option>
@@ -159,7 +198,7 @@ export function Timeline() {
             <label>
               目标快照
               <select value={targetId} onChange={(event) => setTargetId(event.target.value)}>
-                {data.index.map((entry) => (
+                {index.map((entry) => (
                   <option key={entry.snapshot_id} value={entry.snapshot_id}>
                     {entry.snapshot_id}
                   </option>
